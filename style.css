@@ -1,0 +1,272 @@
+
+
+* {
+    box-sizing: border-box;
+}
+
+/* --- HAVALI PERDE AÇILIŞ ANİMASYONU --- */
+.intro-curtain {
+    transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.left-curtain {
+    transform-origin: left;
+}
+
+.right-curtain {
+    transform-origin: right;
+}
+
+/* Sitenin tetiklenmesiyle perdeler iki yana kayar */
+.loaded .left-curtain {
+    transform: translateX(-100%);
+}
+
+.loaded .right-curtain {
+    transform: translateX(100%);
+}
+
+.text-gradient-gold {
+    background: linear-gradient(135deg, #fff 30%, #dfb76c 70%, #fff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- MASAÜSTÜ GRİD SİSTEMİ (Lüks 4'lü Düzen) --- */
+.product-grid-system {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+/* --- KART YAPISI --- */
+.luxury-card {
+    background: white;
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: transform 0.6s ease;
+}
+
+.luxury-card:hover img {
+    transform: scale(1.03);
+}
+
+/* --- DIZAYN TEMALARI (SİHİRLİ TEMA GEÇİŞLERİ) --- */
+
+/* 1. Nötr İlk Mod (Siyah & Beyaz) */
+.theme-neutral .gender-toggle-btn {
+    border-color: #111;
+    color: #111;
+    background: transparent;
+}
+.theme-neutral .gender-toggle-btn:hover {
+    background: #111;
+    color: #fff;
+}
+#btn-women { font-weight: 700; }
+#btn-men { font-weight: 700; }
+
+/* 2. Women Modu (Beyaz, Ferah Mor & Mavi) */
+.theme-women {
+    background-color: #fafbfe !important;
+    color: #2b213a !important;
+}
+.theme-women #main-header, .theme-women #main-footer {
+    background-color: #ffffff !important;
+}
+.theme-women #header-logo { color: #5a4282 !important; }
+.theme-women .nav-social-link { color: #415a77 !important; }
+.theme-women #btn-women {
+    background-color: #5a4282 !important;
+    border-color: #5a4282 !important;
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(90, 66, 130, 0.2);
+}
+.theme-women #btn-men {
+    background-color: transparent !important;
+    border-color: #415a77 !important;
+    color: #415a77 !important;
+}
+.theme-women #title-line { background-color: #5a4282 !important; }
+.theme-women .luxury-card {
+    border-color: rgba(90, 66, 130, 0.15) !important;
+}
+.theme-women .luxury-card:hover {
+    border-color: #5a4282 !important;
+    box-shadow: 0 12px 30px rgba(90, 66, 130, 0.08);
+}
+.theme-women .luxury-card h3 { color: #5a4282 !important; }
+.theme-women .luxury-card p { color: #415a77 !important; }
+
+/* 3. Men Modu (Gizemli Siyah, Odun Bordosu & Derin Mavi) */
+.theme-men {
+    background-color: #0b0f14 !important;
+    color: #f5f5f5 !important;
+}
+.theme-men #main-header, .theme-men #main-footer {
+    background-color: #11161d !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.theme-men #header-logo { color: #b91c1c !important; /* Odun Bordosu */ }
+.theme-men .nav-social-link { color: #38bdf8 !important; /* Okyanus Mavisi */ }
+.theme-men #btn-men {
+    background-color: #4c0519 !important; /* Koyu Bordo */
+    border-color: #b91c1c !important;
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(185, 28, 28, 0.3);
+}
+.theme-men #btn-women {
+    background-color: transparent !important;
+    border-color: #1e293b !important;
+    color: #94a3b8 !important;
+}
+.theme-men #title-line { background-color: #b91c1c !important; }
+.theme-men .luxury-card {
+    background-color: #11161d !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.theme-men .luxury-card:hover {
+    border-color: #b91c1c !important;
+    box-shadow: 0 12px 30px rgba(185, 28, 28, 0.2);
+}
+.theme-men .luxury-card h3 { color: #f5f5f5 !important; }
+.theme-men .luxury-card p { color: #38bdf8 !important; }
+
+/* --- MODALIN EKRANIN TAM MERKEZİNDE DURMASI İÇİN --- */
+#productModal {
+    position: fixed;
+    inset: 0;
+    z-index: 11000;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    
+    /* SİHİRLİ DOKUNUŞ: Modalı hem dikeyde hem yatayda tam merkeze kilitler */
+    display: flex !important; 
+    justify-content: center;
+    align-items: center;
+    
+    /* İlk başta kapalıyken görünmez yapıyoruz, js ile display block olunca flex tetiklenecek */
+    display: none !important; 
+}
+
+/* Modal Açıldığında JavaScript ile Tetiklenen Sınıfın Merkezleme Ayarı */
+#productModal[style*="display: block"] {
+    display: flex !important;
+}
+
+/* --- HIZLANDIRILMIŞ VE MERKEZLENMİŞ MODAL KARTI --- */
+#modal-card {
+    /* Eski my-[15%] üst marjinleri sildik çünkü flex zaten tam ortalıyor knk */
+    margin: 0 auto !important; 
+    width: 92%;
+    max-width: 800px;
+
+    border-radius: 24px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    
+    /* FİŞEK GİBİ HIZLI AÇILIŞ: Süreyi 1s'den 0.25s'ye çektik, animasyon hissiyatı yumuşak ama çok hızlı */
+    animation: luxurySlideUp 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* --- YENİ ULTRA AKICI VE HIZLI ANİMASYON FORMÜLÜ --- */
+@keyframes luxurySlideUp {
+    from { 
+        transform: translateY(15px) scale(0.97); /* Hafif aşağıdan ve küçük gelerek derinlik verir */
+        opacity: 0; 
+    }
+    to { 
+        transform: translateY(0) scale(1); 
+        opacity: 1; 
+    }
+}
+/* --- CANDLE SİMETRİSİ MOBİL AYARLAR (İNATLA YAN YANA 3'LÜ TAM KARE VİTRİN) --- */
+@media (max-width: 767px) {
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+
+    .product-grid-system {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+
+    /* Kartın Çerçeveli ve Kusursuz Bir Şekilde Tam Kare Kalması */
+    .luxury-card {
+        padding: 4px !important;
+        border-radius: 12px !important;
+        aspect-ratio: 1 / 1 !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        overflow: hidden !important;
+    }
+
+    /* Fotoğrafın Kare Kart İçindeki Dengesi */
+    .luxury-card img {
+        width: 100% !important;
+        height: 65% !important; 
+        object-fit: cover !important;
+        border-radius: 8px !important;
+        aspect-ratio: auto !important;
+    }
+
+    /* Kartın Altındaki Yazı Alanı */
+    .luxury-card div {
+        margin-top: 2px !important;
+        padding: 0 2px !important;
+        height: 30% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    /* Yazıların Taşmasını Önleyen Filtreler */
+    .luxury-card h3 {
+        font-size: 0.65rem !important;
+        line-height: 1.1 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .luxury-card p {
+        font-size: 0.65rem !important;
+        margin-top: 1px !important;
+        font-weight: 900 !important;
+    }
+}
+
+/* Animasyon Paketleri */
+.animate-textFade {
+    animation: textFadeInOut 2.2s ease forwards;
+}
+
+@keyframes textFadeInOut {
+    0% { opacity: 0; transform: scale(0.95); }
+    30% { opacity: 1; transform: scale(1); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.02); }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slideUp {
+    animation: slideUp 1s ease forwards 2.4s;
+    opacity: 0;
+}

@@ -1,6 +1,5 @@
-// --- 16 ULTRA LÜKS NİŞ PARFÜMÜN VERİ SETİ (8 Kadın / 8 Erkek) ---
+
 const products = [
-    // --- WOMEN COLLECTION ---
     { id: 1, name: "Mystic Peony", gender: "women", desc: "A fresh burst of blooming pink peonies infused with delicate white litchi and soft cashmere musk.", price: "$120.00", img: "img/1.jpg" },
     { id: 2, name: "Imperial Jasmine", gender: "women", desc: "Regal Sambac jasmine intertwined with glowing liquid amber and a cream-infused vanilla absolute.", price: "$135.00", img: "img/2.jpg" },
     { id: 3, name: "Velvet Orchid", gender: "women", desc: "Seductive black orchid petals wrapped around rich dark rum, warm honey, and velvet sandalwood.", price: "$140.00", img: "img/3.jpg" },
@@ -10,7 +9,6 @@ const products = [
     { id: 7, name: "Gilded Mimosa", gender: "women", desc: "Golden mimosa dust layered beautifully with freshly sliced yellow pear and a clean linen base.", price: "$110.00", img: "img/14.jpg" },
     { id: 8, name: "Siren's Call", gender: "women", desc: "Hypnotic marine aquatic accords balancing warm coconut flesh, tiare flowers, and vanilla pod.", price: "$145.00", img: "img/16.jpg" },
 
-    // --- MEN COLLECTION ---
     { id: 9, name: "Smoky Oud Royale", gender: "men", desc: "Royal deep Cambodian oud layered with intense tobacco leaf, dark patchouli, and resinous olibanum.", price: "$150.00", img: "img/13.jpg" },
     { id: 10, name: "Noir Cedarwood", gender: "men", desc: "Sharp Atlas cedar wood reinforced with crushed black pepper, nutmeg, and a dark vetiver trail.", price: "$130.00", img: "img/6.jpg" },
     { id: 11, name: "Oceanic Saffron", gender: "men", desc: "Sultry premium saffron spices blending perfectly with cool, salty Atlantic air and crisp oakmoss.", price: "$140.00", img: "img/7.jpg" },
@@ -33,7 +31,6 @@ const modalPrice = document.getElementById('modalPrice');
 const modalWA = document.getElementById('modalWhatsApp');
 const closeModal = document.querySelector('.close-modal');
 
-// --- INTERAKTIF TEMA VE CINSIYET GEÇIŞ MOTORU ---
 function switchGender(gender) {
     const headingContainer = document.getElementById('products-heading-container');
     const productsTitle = document.getElementById('products-title');
@@ -41,25 +38,20 @@ function switchGender(gender) {
     headingContainer.classList.remove('hidden');
 
     if (gender === 'women') {
-        // Women Temasını Etkinleştir
         mainBody.className = "theme-women text-[#2b213a] font-['Quicksand'] antialiased overflow-x-hidden transition-colors duration-500";
         productsTitle.innerText = "Pour Femme Collection";
         
-        // Sadece Kadın Ürünlerini Filtrele ve Yükle
         const womenProducts = products.filter(p => p.gender === 'women');
         loadStore(womenProducts);
     } else if (gender === 'men') {
-        // Men Temasını Etkinleştir
         mainBody.className = "theme-men text-[#f5f5f5] font-['Quicksand'] antialiased overflow-x-hidden transition-colors duration-500";
         productsTitle.innerText = "Pour Homme Collection";
         
-        // Sadece Erkek Ürünlerini Filtrele ve Yükle
         const menProducts = products.filter(p => p.gender === 'men');
         loadStore(menProducts);
     }
 }
 
-// Dijital Vitrine Ürünleri Basma Fonksiyonu
 function loadStore(productsToLoad) {
     storeGrid.innerHTML = "";
     productsToLoad.forEach(product => {
@@ -77,7 +69,6 @@ function loadStore(productsToLoad) {
     });
 }
 
-// Gelişmiş Pop-up Modal Motoru
 function openLuxuryModal(product) {
     modalImg.src = product.img;
     modalName.innerText = product.name;
@@ -86,7 +77,6 @@ function openLuxuryModal(product) {
     
     modalGender.innerText = product.gender === 'women' ? '— Pour Femme —' : '— Pour Homme —';
 
-    // Aktif temaya göre modal içindeki buton ve badge renklerini dinamik senkronize etme
     if (product.gender === 'women') {
         modalCard.className = "bg-white p-6 md:p-8 w-[92%] max-w-[800px] rounded-[24px] relative border-2 border-[#5a4282] shadow-2xl animate-slideUp text-[#2b213a]";
         modalGender.className = "font-['Cinzel'] text-xs tracking-[3px] uppercase font-bold mb-2 block text-[#5a4282]";
@@ -99,7 +89,6 @@ function openLuxuryModal(product) {
         modalWA.className = "flex-1 p-4 bg-[#4c0519] hover:bg-[#b91c1c] text-white text-center font-bold text-base rounded-[14px] no-underline transition-all duration-300 hover:-translate-y-0.5 shadow-md border border-[#b91c1c] flex items-center justify-center gap-2";
     }
 
-    // WhatsApp Sipariş Şablon Metni (Lüks Dil)
     const message = `Greetings AURA DE L'ÉLITE. I have discovered the magnificent fragrance "${product.name}" (${product.price}) from your digital atelier and I would like to initiate a private order request.`;
     modalWA.href = `https://wa.me/905xxxxxxxxx?text=${encodeURIComponent(message)}`; 
 
@@ -108,7 +97,6 @@ function openLuxuryModal(product) {
     document.body.style.overflow = "hidden"; 
 }
 
-// Modalı Güvenle Kapatma
 closeModal.onclick = () => {
     modal.classList.add('hidden');
     modal.style.display = "none";
@@ -119,9 +107,8 @@ window.onclick = (e) => {
     if (e.target == modal) closeModal.onclick();
 }
 
-// --- SAYFA AÇILDIĞINDA GİRİŞ PERDESİNİ TETİKLEME ---
 document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         document.getElementById('brand-intro').classList.add('loaded');
-    }, 2300); // 2.3 saniye sonra perdeler iki yana havalı bir şekilde açılır
+    }, 2300); 
 });
